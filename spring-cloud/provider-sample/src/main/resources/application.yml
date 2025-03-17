@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: provider-sample
+  cloud:
+    nacos:
+      server-addr: 192.168.168.168:8848
+      username: nacos
+      password: nacos
+server:
+  port: 8081
