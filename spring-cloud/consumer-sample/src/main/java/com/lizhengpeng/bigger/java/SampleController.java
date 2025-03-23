@@ -29,4 +29,9 @@ public class SampleController {
         return providerFeign.callHello();
     }
 
+    @GetMapping("/hello-by-rest-template")
+    public String callProviderByRestTemplate() {
+        return restTemplate.getForObject("http://provider-sample/hello", String.class);
+    }
+
 }
