@@ -1,0 +1,18 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: gateway-sample
+  cloud:
+    nacos:
+      server-addr: 192.168.168.168:8848
+      username: nacos
+      password: nacos
+    gateway:
+      routes:
+        - id: provider-sample
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/api/provider-sample/**
+          filters:
+            - RewritePath=/api/provider-sample/(?<segment>.*), /${segment}
