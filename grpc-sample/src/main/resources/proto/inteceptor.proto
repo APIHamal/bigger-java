@@ -12,3 +12,15 @@ message GrpcRequest {
 service EchoService {
   rpc echo(GrpcRequest) returns (GrpcRequest) {}
 }
+
+message Payload{
+  string type = 1;
+  string response = 2;
+}
+
+service FallbackService{
+  rpc unaryEcho(Payload) returns(Payload);
+  rpc clientStreamEcho(stream Payload) returns(Payload);
+  rpc serverStreamEcho(Payload) returns (stream Payload);
+  rpc doubleStreamEcho(stream Payload) returns (stream Payload);
+}
