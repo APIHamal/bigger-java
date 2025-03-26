@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-cloud</module>
+        <module>grpc-sample</module>
     </modules>
 
     <properties>

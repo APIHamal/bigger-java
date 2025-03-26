@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "com.lizhengpeng.bigger.java.grpc";
+option java_multiple_files = false;
+option java_outer_classname = "GrpcServer";
+
+message GrpcRequest {
+  string requestId = 1;
+  int32 requestIndex = 2;
+}
+
+service EchoService {
+  rpc echo(GrpcRequest) returns (GrpcRequest) {}
+}
