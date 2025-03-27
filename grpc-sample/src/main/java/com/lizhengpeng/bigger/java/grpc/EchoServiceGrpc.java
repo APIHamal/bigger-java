@@ -46,6 +46,37 @@ public final class EchoServiceGrpc {
     return getEchoMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest,
+      com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> getStreamEchoMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "streamEcho",
+      requestType = com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest.class,
+      responseType = com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest,
+      com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> getStreamEchoMethod() {
+    io.grpc.MethodDescriptor<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest, com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> getStreamEchoMethod;
+    if ((getStreamEchoMethod = EchoServiceGrpc.getStreamEchoMethod) == null) {
+      synchronized (EchoServiceGrpc.class) {
+        if ((getStreamEchoMethod = EchoServiceGrpc.getStreamEchoMethod) == null) {
+          EchoServiceGrpc.getStreamEchoMethod = getStreamEchoMethod =
+              io.grpc.MethodDescriptor.<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest, com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "streamEcho"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest.getDefaultInstance()))
+              .setSchemaDescriptor(new EchoServiceMethodDescriptorSupplier("streamEcho"))
+              .build();
+        }
+      }
+    }
+    return getStreamEchoMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class EchoServiceGrpc {
         io.grpc.stub.StreamObserver<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getEchoMethod(), responseObserver);
     }
+
+    /**
+     */
+    default io.grpc.stub.StreamObserver<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> streamEcho(
+        io.grpc.stub.StreamObserver<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getStreamEchoMethod(), responseObserver);
+    }
   }
 
   /**
@@ -135,6 +173,14 @@ public final class EchoServiceGrpc {
         io.grpc.stub.StreamObserver<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getEchoMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> streamEcho(
+        io.grpc.stub.StreamObserver<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest> responseObserver) {
+      return io.grpc.stub.ClientCalls.asyncBidiStreamingCall(
+          getChannel().newCall(getStreamEchoMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -188,6 +234,7 @@ public final class EchoServiceGrpc {
   }
 
   private static final int METHODID_ECHO = 0;
+  private static final int METHODID_STREAM_ECHO = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -220,6 +267,9 @@ public final class EchoServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_STREAM_ECHO:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.streamEcho(
+              (io.grpc.stub.StreamObserver<com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -235,6 +285,13 @@ public final class EchoServiceGrpc {
               com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest,
               com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest>(
                 service, METHODID_ECHO)))
+        .addMethod(
+          getStreamEchoMethod(),
+          io.grpc.stub.ServerCalls.asyncBidiStreamingCall(
+            new MethodHandlers<
+              com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest,
+              com.lizhengpeng.bigger.java.grpc.GrpcServer.GrpcRequest>(
+                service, METHODID_STREAM_ECHO)))
         .build();
   }
 
@@ -284,6 +341,7 @@ public final class EchoServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new EchoServiceFileDescriptorSupplier())
               .addMethod(getEchoMethod())
+              .addMethod(getStreamEchoMethod())
               .build();
         }
       }

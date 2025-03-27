@@ -28,6 +28,31 @@ public class ClientSample {
         printServiceBlockingStub.print(request);
         System.out.println("printServiceBlockingStub channel " + printServiceBlockingStub.getChannel());
 
+        EchoServiceGrpc.EchoServiceStub echoServiceStub = EchoServiceGrpc.newStub(channel);
+        StreamObserver<GrpcServer.GrpcRequest> requestStreamObserver = echoServiceStub.streamEcho(new StreamObserver<GrpcServer.GrpcRequest>() {
+            @Override
+            public void onNext(GrpcServer.GrpcRequest grpcRequest) {
+                System.out.println("接收到服务端消息" + grpcRequest.toString());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                throwable.printStackTrace();
+            }
+
+            @Override
+            public void onCompleted() {
+                System.out.println("服务端消息推送完成");
+            }
+        });
+        requestStreamObserver.onNext(GrpcServer.GrpcRequest.newBuilder()
+                .setRequestId("request-id-1")
+                .build());
+        requestStreamObserver.onNext(GrpcServer.GrpcRequest.newBuilder()
+                .setRequestId("request-id-2")
+                .build());
+        requestStreamObserver.onCompleted();
+
         Thread.sleep(1000 * 5);
 
     }

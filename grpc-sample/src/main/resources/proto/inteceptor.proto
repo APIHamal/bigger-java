@@ -15,6 +15,7 @@ service PrintService {
 
 service EchoService {
   rpc echo(GrpcRequest) returns (GrpcRequest) {}
+  rpc streamEcho(stream GrpcRequest) returns (stream GrpcRequest){}
 }
 
 message Payload{

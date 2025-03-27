@@ -1362,14 +1362,15 @@ public final class GrpcServer {
       "uestId\030\001 \001(\t\022\024\n\014requestIndex\030\002 \001(\005\")\n\007Pa" +
       "yload\022\014\n\004type\030\001 \001(\t\022\020\n\010response\030\002 \001(\t25\n" +
       "\014PrintService\022%\n\005print\022\014.GrpcRequest\032\014.G" +
-      "rpcRequest\"\00023\n\013EchoService\022$\n\004echo\022\014.Gr" +
-      "pcRequest\032\014.GrpcRequest\"\0002\262\001\n\017FallbackSe" +
-      "rvice\022\037\n\tunaryEcho\022\010.Payload\032\010.Payload\022(" +
-      "\n\020clientStreamEcho\022\010.Payload\032\010.Payload(\001" +
-      "\022(\n\020serverStreamEcho\022\010.Payload\032\010.Payload" +
-      "0\001\022*\n\020doubleStreamEcho\022\010.Payload\032\010.Paylo" +
-      "ad(\0010\001B0\n com.lizhengpeng.bigger.java.gr" +
-      "pcB\nGrpcServerP\000b\006proto3"
+      "rpcRequest\"\0002c\n\013EchoService\022$\n\004echo\022\014.Gr" +
+      "pcRequest\032\014.GrpcRequest\"\000\022.\n\nstreamEcho\022" +
+      "\014.GrpcRequest\032\014.GrpcRequest\"\000(\0010\0012\262\001\n\017Fa" +
+      "llbackService\022\037\n\tunaryEcho\022\010.Payload\032\010.P" +
+      "ayload\022(\n\020clientStreamEcho\022\010.Payload\032\010.P" +
+      "ayload(\001\022(\n\020serverStreamEcho\022\010.Payload\032\010" +
+      ".Payload0\001\022*\n\020doubleStreamEcho\022\010.Payload" +
+      "\032\010.Payload(\0010\001B0\n com.lizhengpeng.bigger" +
+      ".java.grpcB\nGrpcServerP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
