@@ -9,6 +9,10 @@ message GrpcRequest {
   int32 requestIndex = 2;
 }
 
+service PrintService {
+  rpc print(GrpcRequest) returns (GrpcRequest) {}
+}
+
 service EchoService {
   rpc echo(GrpcRequest) returns (GrpcRequest) {}
 }

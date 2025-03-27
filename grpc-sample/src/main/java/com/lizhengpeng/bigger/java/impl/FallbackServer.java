@@ -40,7 +40,22 @@ public class FallbackServer {
         ServerCallHandler<GrpcServer.Payload, GrpcServer.Payload> bidiServerCall = ServerCalls.asyncBidiStreamingCall(new ServerCalls.BidiStreamingMethod<GrpcServer.Payload, GrpcServer.Payload>() {
             @Override
             public StreamObserver<GrpcServer.Payload> invoke(StreamObserver<GrpcServer.Payload> streamObserver) {
-                return null;
+                return new StreamObserver<GrpcServer.Payload>() {
+                    @Override
+                    public void onNext(GrpcServer.Payload payload) {
+                        streamObserver.onNext(payload);
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        streamObserver.onError(throwable);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        streamObserver.onCompleted();
+                    }
+                };
             }
         });
 
