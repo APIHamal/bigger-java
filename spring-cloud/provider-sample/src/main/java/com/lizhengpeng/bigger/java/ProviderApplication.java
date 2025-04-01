@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,14 @@ import java.util.Map;
 @SpringBootApplication
 @RestController
 public class ProviderApplication {
+
+    @Resource
+    private HelloComponent helloComponent;
+
+    @GetMapping("/hello-component")
+    public String helloComponent() {
+        return helloComponent.getHello();
+    }
 
     @GetMapping("/hello")
     public String welcome(HttpServletRequest request) {
