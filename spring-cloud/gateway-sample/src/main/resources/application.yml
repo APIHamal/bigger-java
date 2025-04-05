@@ -11,8 +11,55 @@ spring:
     gateway:
       routes:
         - id: provider-sample
-          uri: http://127.0.0.1:8081
+          uri: lb://provider-sample
           predicates:
             - Path=/api/provider-sample/**
           filters:
-            - RewritePath=/api/provider-sample/(?<segment>.*), /${segment}
+            - RewritePath=/api/provider-sample/(?<segment>.*), /$\{segment}
+            - name: IpRateLimiter
+              args:
+                script: ip_rate_limiter.lua
+#            - name: RequestRateLimiter
+#              args:
+#                # 每秒10个令牌
+#                redis-rate-limiter.replenishRate: 1
+#                # 桶容量20
+#                redis-rate-limiter.burstCapacity: 2
+#                # 每个请求消耗1个令牌
+#                redis-rate-limiter.requestedTokens: 1
+#                #【#{@userKeyResolver}】是一个引用名为【userKeyResolver】的bean的SpEL表达式,对应的bean必须是一个【KeyResolver】类型的对象
+#                key-resolver: "#{@urlKeyResolver}"
+#            - name: RequestLogFilter
+#              args:
+#                open: true
+        - id: consumer-sample
+          uri: http://127.0.0.1:8080
+          predicates:
+            - Path=/api/consumer-sample/**
+          filters:
+            - RewritePath=/api/consumer-sample/(?<segment>.*), /$\{segment}
+#      default-filters:
+#        - name: RequestRateLimiter
+#          args:
+#            # 每秒10个令牌
+#            redis-rate-limiter.replenishRate: 1
+#            # 桶容量20
+#            redis-rate-limiter.burstCapacity: 2
+#            # 每个请求消耗1个令牌
+#            redis-rate-limiter.requestedTokens: 1
+#            #【#{@userKeyResolver}】是一个引用名为【userKeyResolver】的bean的SpEL表达式,对应的bean必须是一个【KeyResolver】类型的对象
+#            key-resolver: "#{@urlKeyResolver}"
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 30000
+  redis:
+    host: 192.168.168.168
+    port: 16379
+    timeout: 5000
+    database: 0
+    client-name: ${spring.application.name}
+    lettuce:
+      pool:
+        min-idle: 8
+        max-active: 64
+        max-wait: 3000

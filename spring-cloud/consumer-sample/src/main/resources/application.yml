@@ -6,6 +6,7 @@ spring:
       server-addr: 192.168.168.168:8848
       username: nacos
       password: nacos
+
 server:
   port: 8080
 # 自定义配置feign的属性
