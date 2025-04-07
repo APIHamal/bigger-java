@@ -76,21 +76,6 @@ public class IpRateLimiter extends AbstractGatewayFilterFactory<IpRateLimiter.Co
                             DataBuffer buffer = response.bufferFactory().wrap(jsonBody.getBytes(StandardCharsets.UTF_8));
                             return response.writeWith(Mono.just(buffer)); // 正确返回 Mono<Void>
                         }
-                    })
-                    .onErrorResume(throwable -> {
-                        throwable.printStackTrace();
-                        // 处理异常（如 Redis 连接失败、脚本错误等）
-                        ServerHttpResponse response = exchange.getResponse();
-                        if (response.isCommitted()) {
-                            return Mono.empty();
-                        }
-
-                        String errorBody = "{\"code\": 500, \"message\": \"服务器限流功能异常\"}";
-                        response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
-                        response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-
-                        DataBuffer buffer = response.bufferFactory().wrap(errorBody.getBytes(StandardCharsets.UTF_8));
-                        return response.writeWith(Mono.just(buffer)); // 直接返回 Mono<Void>
                     });
         };
     }
