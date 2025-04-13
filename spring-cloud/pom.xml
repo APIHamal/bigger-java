@@ -14,6 +14,7 @@
         <module>consumer-sample</module>
         <module>provider-sample</module>
         <module>gateway-sample</module>
+        <module>mybatis-sample</module>
     </modules>
 
     <artifactId>spring-cloud</artifactId>
