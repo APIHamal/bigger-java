@@ -7,5 +7,5 @@ import java.util.List;
  * @Date 2025/1/26 上午10:57
  **/
 public interface IUserDao {
-	List<User> fetchAll();
+	List<User> fetchAll(Long id);
 }

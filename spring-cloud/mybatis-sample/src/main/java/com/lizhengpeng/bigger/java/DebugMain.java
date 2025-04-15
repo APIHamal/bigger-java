@@ -18,8 +18,8 @@ public class DebugMain {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
         // 添加分页逻辑
-        PageHelper.startPage(2, 1);
-        List<User> users = userDao.fetchAll();
+        PageHelper.startPage(1, 10);
+        List<User> users = userDao.fetchAll(1l);
         PageInfo<User> pageInfo = new PageInfo<>(users);
         System.out.println(objectMapper.writeValueAsString(pageInfo));
         sqlSession.close();

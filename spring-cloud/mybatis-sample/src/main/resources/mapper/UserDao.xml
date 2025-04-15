@@ -5,6 +5,7 @@
     <select id="fetchAll" resultType="com.lizhengpeng.bigger.java.User">
         SELECT *
         FROM user
+        where id = #{id}
     </select>
 
 </mapper>
