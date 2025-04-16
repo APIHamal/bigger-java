@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lizhengpeng.bigger.java.IUserDao">
 
-    <select id="fetchAll" resultType="com.lizhengpeng.bigger.java.User">
+    <!-- 启用二级缓存，配置缓存策略和刷新间隔 -->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+    <select id="fetchAll" resultType="com.lizhengpeng.bigger.java.User" useCache="true">
         SELECT *
         FROM user
         where id = #{id}
