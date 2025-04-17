@@ -1,5 +1,6 @@
 package com.lizhengpeng.bigger.java;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.Interceptor;
@@ -8,6 +9,7 @@ import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.util.StopWatch;
 
 
 @Intercepts(
@@ -19,16 +21,18 @@ import org.apache.ibatis.session.RowBounds;
                 )
         }
 )
+@Slf4j
 public class StatsInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        long start = System.currentTimeMillis();
+        StopWatch timeWatch = new StopWatch("SQL Execute Time Watch");
+        timeWatch.start();
         try {
             return invocation.proceed();
         } finally {
-            long end = System.currentTimeMillis();
-            System.out.println("SQL执行耗时 => "  + (end - start) + "毫秒");
+            timeWatch.stop();
+            log.info("{}执行耗时{}毫秒", timeWatch.getId(), timeWatch.getTotalTimeMillis());
         }
 
     }
