@@ -6,5 +6,8 @@ spring:
       server-addr: 192.168.168.168:8848
       username: nacos
       password: nacos
+  # 配置国际化支持
+  messages:
+    basename: i18n/messages
 server:
   port: 8081

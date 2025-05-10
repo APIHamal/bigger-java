@@ -6,12 +6,15 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import java.io.InputStreamReader;
 import java.util.List;
 
 public class DebugMain {
     public static void main(String[] args) throws Exception {
+        XmlWebApplicationContext context = new XmlWebApplicationContext();
+
         ObjectMapper objectMapper = new ObjectMapper();
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
                 .build(new InputStreamReader(DebugMain.class.getClassLoader().getResourceAsStream("mybatis-config-datasource.xml")));
