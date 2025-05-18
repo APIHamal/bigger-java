@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Premain-Class: com.lizhengpeng.bigger.java.MethodStatAgent
+Agent-Class: com.lizhengpeng.bigger.java.MethodStatAgent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true

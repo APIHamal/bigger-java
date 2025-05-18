@@ -24,6 +24,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- 自定义插装代码 -->
+        <dependency>
+            <groupId>com.lizhengpeng.bigger.java</groupId>
+            <artifactId>instrumentation-sample</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>
