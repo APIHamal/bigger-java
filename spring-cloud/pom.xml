@@ -16,6 +16,8 @@
         <module>gateway-sample</module>
         <module>mybatis-sample</module>
         <module>framework-sample</module>
+        <module>java-sample</module>
+        <module>instrumentation-sample</module>
     </modules>
 
     <artifactId>spring-cloud</artifactId>
@@ -96,17 +98,19 @@
         </dependency>
     </dependencies>
 
-    <!-- 构建配置 -->
     <build>
         <plugins>
-            <!-- Spring Boot Maven 插件（需显式指定版本） -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
-                <configuration>
-                    <mainClass>com.example.Application</mainClass>
-                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal> <!-- 关键：生成可执行JAR -->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
